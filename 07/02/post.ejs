@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Ragistration Form</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+      sup {
+        color: red;
+      }
+
+      .error,
+      .parsley-required,
+      .parsley-type {
+        color: red;
+        font-size: 14px;
+        list-style: none;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container mt-5 mb-5">
+
+
+      <div class="card ">&nbsp;&nbsp;
+
+        <div class=" p-4">
+
+          <form action="http://localhost:7005/send_post" method="post" id="form" autocomplete="off" data-parsley-validate>
+            <h1>Registration Form</h1>
+            <hr><br>
+            <div class="form-group">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="first-name"><b>First Name<sup>*</sup></b></label>
+                  <input type="text" class="form-control" name="fname" id="fname" data-parsley-pattern="[a-zA-Z]*" data-parsley-required>
+                  <% if(locals.errors && locals.errors.fname){ %>
+                    <div class="error">
+                        <%= errors.fname[0] %>
+                    </div>
+                    <% } %>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="last-name"><b>Last Name<sup>*</sup></b></label>
+                  <input type="text" class="form-control" name="lname" id="lname" data-parsley-pattern="[a-zA-Z]*" data-parsley-required>
+                  <% if(locals.errors && locals.errors.lname){ %>
+                    <div class="error">
+                        <%= errors.lname[0] %>
+                    </div>
+                    <% } %>
+                </div>
+              </div>
+              
+              <label for="email"><b>Email<sup>*</sup></b></label>
+              <input type="email" class="form-control" name="email" id="email" data-parsley-required="true">
+              <% if(locals.errors && locals.errors.email){ %>
+                <div class="error">
+                    <%= errors.email[0] %>
+                </div>
+                <% } %>
+            <br>
+              <label for="phone"><b>Mobile Number<sup>*</sup></b></label>
+              
+                <input type="tel" class="form-control col-9" id="phone" name="phone" size="10" maxlength="10" pattern="[0-9]*" data-parsley-required="true">
+                <% if(locals.errors && locals.errors.phone){ %>
+                    <div class="error">
+                        <%= errors.phone[0] %>
+                    </div>
+                    <% } %>
+
+                    <br>
+
+              <div class="d-grid gap-2 ">
+                <input type="submit" class="btn btn-success" value="Submit">
+              </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="container mt-5 mb-5">
+          <div class="d-flex justify-content-center">
+            <table id="mytable" class="table table-striped">
+              
+                <tr class="thead-dark">
+                  <th>Id</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Mobile Number</th>
+                </tr>
+              <% for(var i=0; i < data.length; i++){ %>
+              <tr>
+                <td>
+                  <%= data[i].id %>
+                </td>
+                <td>
+                  <%= data[i].fname %>
+                </td>
+                <td>
+                  <%= data[i].lname %>
+                </td>
+                <td>
+                  <%= data[i].email %>
+                </td>
+                <td>
+                  <%= data[i].phone %>
+                </td>
+              </tr>
+              <%} %>
+            </table>
+          </div>
+        </div>
+
+</html>

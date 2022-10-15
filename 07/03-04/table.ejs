@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+      </head>
+
+      <body>
+        <div class="container mt-5 mb-5">
+          <main class="">
+            <div class="bg-light p-5 rounded mt-3">
+              <h1>Image example</h1>
+              <p class="lead">Click here for add Data.</p>
+              <a class="btn btn-lg btn-primary" href="/insert" role="button">Add Data &raquo;</a>
+            </div>
+        </main>
+          <div class="d-flex justify-content-center">
+            
+            <table id="mytable" class="table table-striped">
+              
+                <tr class="thead-dark">
+                  <th>Id</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>password</th>
+                  <th>Mobile Number</th>
+                  <th>image</th>
+                  <th>Action</th>
+                </tr>
+              <% for(var i=0; i < data.length; i++){ %>
+              <tr>
+                <td>
+                  <%= data[i].id %>
+                </td>
+                <td>
+                  <%= data[i].first_name %>
+                </td>
+                <td>
+                  <%= data[i].last_name %>
+                </td>
+                <td>
+                  <%= data[i].email %>
+                </td>
+                <td>
+                  <%= data[i].password %>
+                </td>
+                <td>
+                  <%= data[i].phone %>
+                </td>
+                <td>
+                    <img width="100px" src="/uploads/<% if(data[i].image == ''){ %>no-image.jpg<% }else{ %><%=data[i].image%><%} %>" class="img-thumbnail" alt="...">
+                </td>
+                <td>
+                  <button class="btn btn-success" onclick="window.location.href='/get_edit/<%- data[i].id %>'"><i class="bi bi-pen"></i></button>
+                  <button class="btn btn-danger" onclick="window.location.href='/delete/<%- data[i].id %>'"><i class="bi bi-trash2"></i></button>
+                </td>
+              </tr>
+              <%} %>
+            </table>
+          </div>
+        </div>
+      </body>
+
+    </html>
+  </body>
+
+</html>
